@@ -1,18 +1,17 @@
 version: 0.2
-
 phases:
   install:
-    runtime-versions:
-      nodejs: 12
+    commands:
+      - npm install
   build:
     commands:
-      - echo Build started on `date`
-      - npm install
       - npm run build
-       
+  post_build:
+    commands:
+      - cp -R node_modules/ dist/node_modules # nodejs needs this
+      - cp Procfile dist/Procfile # EBS needs this
 artifacts:
   files:
-    - '**/*'
-cache:
-  paths:
-    - './node_modules/**/*'
+    - "**/*"
+  discard-paths: no
+  base-directory: dist
