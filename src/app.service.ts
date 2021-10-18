@@ -8,8 +8,9 @@ export class AppService {
   async getHello(req: Request, file): Promise<string> {
     console.log('Uploading.....');
     const res = await this.uploadImage(file);
-    console.log('Done');
-    return 'Hello World!';
+    console.log('Done ');
+
+    return res.Location;
   }
   uploadImage(file) {
     const s3bucket = new AWS.S3({
